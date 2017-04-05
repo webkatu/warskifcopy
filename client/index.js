@@ -20,7 +20,7 @@ router.use((req, res, next) => {
 	next();
 });
 
-router.get(config.entry + '/', async (req, res, next) => {
+router.get(config.deploy + '/', async (req, res, next) => {
 	if(req.query.id === undefined) return next();
 	const index = new Index();
 	index.setAttribute('search-id', req.query.id);

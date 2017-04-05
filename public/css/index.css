@@ -36,6 +36,9 @@ match-record-table table {
     padding: 3px;
     border: 1px solid #ccc;
     text-align: center; }
+    match-record-table table th a, match-record-table table td a {
+      color: #000;
+      text-decoration: none; }
   match-record-table table th {
     background: #ddd; }
   match-record-table table td.winner {
@@ -60,3 +63,13 @@ x-index match-record-search article {
 
 x-index x-footer footer {
   margin-top: 40px; }
+
+@media screen and (max-width: 720px) {
+  .app {
+    width: 100%; } }
+
+@media screen and (max-width: 600px) {
+  match-record-table th:nth-of-type(2) {
+    display: none; }
+  match-record-table match-record-tr td:nth-of-type(2) {
+    display: none; } }

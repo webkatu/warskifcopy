@@ -61,6 +61,9 @@ function getMatchRecord(element, className) {
 
 	const black = element.querySelectorAll('tr')[0].children[1].textContent;
 	const white = element.querySelectorAll('tr')[1].children[1].textContent;
+
+	const blackUserPage = config.warsOrigin + element.querySelectorAll('a')[0].getAttribute('href');
+	const whiteUserPage = config.warsOrigin + element.querySelectorAll('a')[1].getAttribute('href');
 	
 	let winner = '';
 	if(element.children[0].classList.contains('win')) winner = 'black';
@@ -70,7 +73,7 @@ function getMatchRecord(element, className) {
 	if(time === '') time = element.children[4].textContent;
 	const url = 'https:' + element.querySelectorAll('a')[2].getAttribute('href');
 	
-	return { black, white, winner, time, url, class: className};
+	return { black, white, blackUserPage, whiteUserPage, winner, time, url, class: className};
 
 }
 

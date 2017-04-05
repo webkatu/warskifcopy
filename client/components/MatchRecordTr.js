@@ -5,8 +5,8 @@ const template = document.createElement('template');
 template.innerHTML = `
 <td></td>
 <td></td>
-<td></td>
-<td></td>
+<td><a></a></td>
+<td><a></a></td>
 <td></td>
 <style>
 match-record-tr {
@@ -31,10 +31,11 @@ export default class MatchRecordTr extends HTMLElement {
 		this.style.display = 'table-row';
 
 		const matchRecord = props.matchRecord;
+
 		content.childNodes[0].textContent = matchRecord.time;
 		content.childNodes[1].textContent = matchRecord.class;
-		content.childNodes[2].textContent = matchRecord.black;
-		content.childNodes[3].textContent = matchRecord.white;
+		content.childNodes[2].innerHTML = `<a href="${matchRecord.blackUserPage}" target="_blank">${matchRecord.black}</a>`;
+		content.childNodes[3].innerHTML = `<a href="${matchRecord.whiteUserPage}" target="_blank">${matchRecord.white}</a>`;
 		if(matchRecord.winner === 'black') content.childNodes[2].classList.add('winner');
 		else if(matchRecord.winner === 'white') content.childNodes[3].classList.add('winner');
 

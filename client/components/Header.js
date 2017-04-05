@@ -13,7 +13,7 @@ export default class Header extends HTMLElement {
 		super();
 		const content = this.constructor.template.content.cloneNode(true);
 		content.appendChild(new Notification());
-		content.querySelector('a').href = config.entry;
+		content.querySelector('a').href = config.deploy;
 
 		this.appendChild(content);
 	}

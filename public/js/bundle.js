@@ -88,7 +88,7 @@
 		next();
 	});
 
-	router.get(_config2.default.entry + '/', function () {
+	router.get(_config2.default.deploy + '/', function () {
 		var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res, next) {
 			var index;
 			return _regenerator2.default.wrap(function _callee$(_context) {
@@ -3263,14 +3263,28 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	var deploy = void 0;
+	var server = void 0;
+	if (location.host.indexOf('pro.webkatu.com') === -1) {
+		//dev
+		deploy = '/warskifcopy/public';
+		server = '/warskifcopy/server/index.php';
+	} else {
+		//release
+		deploy = '/warskifcopy';
+		server = 'http://server.pro.webkatu.com/warskifcopy/index.php';
+		//server = 'http://warskifucopy.webcrow.jp/index.php',
+	}
+
 	exports.default = {
-		entry: '/warskifcopy',
-		server: 'http://warskifucopy.webcrow.jp/index.php',
+		deploy: deploy,
+		server: server,
 		url: {
 			'10切れ': 'https://shogiwars.heroz.jp/users/history/:id',
 			'3切れ': 'https://shogiwars.heroz.jp/users/history/:id?gtype=sb',
 			'10秒': 'https://shogiwars.heroz.jp/users/history/:id?gtype=s1'
-		}
+		},
+		warsOrigin: 'https://shogiwars.heroz.jp'
 	};
 
 /***/ },
@@ -4163,7 +4177,7 @@
 
 			var content = _this.constructor.template.content.cloneNode(true);
 			content.appendChild(new _Notification2.default());
-			content.querySelector('a').href = _config2.default.entry;
+			content.querySelector('a').href = _config2.default.deploy;
 
 			_this.appendChild(content);
 			return _this;
@@ -4748,6 +4762,9 @@
 		var black = element.querySelectorAll('tr')[0].children[1].textContent;
 		var white = element.querySelectorAll('tr')[1].children[1].textContent;
 
+		var blackUserPage = _config2.default.warsOrigin + element.querySelectorAll('a')[0].getAttribute('href');
+		var whiteUserPage = _config2.default.warsOrigin + element.querySelectorAll('a')[1].getAttribute('href');
+
 		var winner = '';
 		if (element.children[0].classList.contains('win')) winner = 'black';else if (element.children[1].classList.contains('win')) winner = 'white';
 
@@ -4755,7 +4772,7 @@
 		if (time === '') time = element.children[4].textContent;
 		var url = 'https:' + element.querySelectorAll('a')[2].getAttribute('href');
 
-		return { black: black, white: white, winner: winner, time: time, url: url, class: className };
+		return { black: black, white: white, blackUserPage: blackUserPage, whiteUserPage: whiteUserPage, winner: winner, time: time, url: url, class: className };
 	}
 
 	function saveMatchRecord(matchRecord) {
@@ -4983,8 +5000,8 @@
 	template.innerHTML = `
 	<td></td>
 	<td></td>
-	<td></td>
-	<td></td>
+	<td><a></a></td>
+	<td><a></a></td>
 	<td></td>
 	<style>
 	match-record-tr {
@@ -5013,10 +5030,11 @@
 			_this.style.display = 'table-row';
 
 			var matchRecord = props.matchRecord;
+
 			content.childNodes[0].textContent = matchRecord.time;
 			content.childNodes[1].textContent = matchRecord.class;
-			content.childNodes[2].textContent = matchRecord.black;
-			content.childNodes[3].textContent = matchRecord.white;
+			content.childNodes[2].innerHTML = '<a href="' + matchRecord.blackUserPage + '" target="_blank">' + matchRecord.black + '</a>';
+			content.childNodes[3].innerHTML = '<a href="' + matchRecord.whiteUserPage + '" target="_blank">' + matchRecord.white + '</a>';
 			if (matchRecord.winner === 'black') content.childNodes[2].classList.add('winner');else if (matchRecord.winner === 'white') content.childNodes[3].classList.add('winner');
 
 			_this.kifuCopy = new _KifuCopy2.default({ matchRecord: matchRecord });
@@ -5247,7 +5265,7 @@
 			key: 'loadKifu',
 			value: function () {
 				var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
-					var response, text, doc, moves, kifuText;
+					var response, text, doc, queryIndex, moves, kifuText;
 					return _regenerator2.default.wrap(function _callee2$(_context2) {
 						while (1) {
 							switch (_context2.prev = _context2.next) {
@@ -5268,7 +5286,10 @@
 								case 6:
 									text = _context2.sent;
 									doc = new DOMParser().parseFromString(text, 'text/html');
-									moves = doc.querySelectorAll('script')[12].textContent.match(/receiveMove\(\"(.+)\"\);/)[1].split('\t');
+									queryIndex = 11;
+
+									if (doc.querySelectorAll('script')[queryIndex].textContent.indexOf('receiveMove') === -1) queryIndex = 12;
+									moves = doc.querySelectorAll('script')[queryIndex].textContent.match(/receiveMove\(\"(.+)\"\);/)[1].split('\t');
 
 									moves.pop();
 									kifuText = '';
@@ -5288,7 +5309,7 @@
 									this.kifuText = kifuText;
 									this.setAttribute('loading-state', 'loaded');
 
-								case 18:
+								case 20:
 								case 'end':
 									return _context2.stop();
 							}

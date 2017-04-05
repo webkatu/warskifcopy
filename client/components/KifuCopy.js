@@ -49,7 +49,9 @@ export default class KifuCopy extends HTMLElement {
 		});
 		const text = await response.text();
 		const doc = new DOMParser().parseFromString(text, 'text/html');
-		const moves = doc.querySelectorAll('script')[12].textContent.match(/receiveMove\(\"(.+)\"\);/)[1].split('\t');
+		let queryIndex = 11;
+		if(doc.querySelectorAll('script')[queryIndex].textContent.indexOf('receiveMove') === -1) queryIndex = 12;
+		const moves = doc.querySelectorAll('script')[queryIndex].textContent.match(/receiveMove\(\"(.+)\"\);/)[1].split('\t');
 		moves.pop();
 		let kifuText = ``
 		kifuText += `開始日時：${this.matchRecord.time}\n`;
