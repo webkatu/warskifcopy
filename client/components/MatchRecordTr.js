@@ -86,7 +86,7 @@ export default class MatchRecordTr extends HTMLElement {
 				return;
 			}
 			case 'white':
-				const a = this.tds[2].querySelector('a');
+				const a = this.tds[3].querySelector('a');
 				a.href = `${location.pathname}?id=${this.record.white.split(' ')[0]}`;
 				a.onclick = this.handleUserAnchorClick;
 				a.textContent = this.record.white;
