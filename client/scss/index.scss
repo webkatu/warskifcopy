@@ -14,6 +14,10 @@ strong {
 	color: #f00;
 }
 
+html {
+	border-top: 6px solid #fbb;
+}
+
 body {
 	background: rgb(255, 250, 250);
 }
@@ -128,7 +132,7 @@ x-index {
 }
 
 @media screen and (max-width: 600px) {
-	match-record-table {
+	match-records-table {
 		th:nth-of-type(2) {
 			display: none;
 		}

@@ -8,6 +8,9 @@ a {
 strong {
   color: #f00; }
 
+html {
+  border-top: 6px solid #fbb; }
+
 body {
   background: snow; }
 
@@ -82,7 +85,7 @@ x-index x-footer footer {
     width: 100%; } }
 
 @media screen and (max-width: 600px) {
-  match-record-table th:nth-of-type(2) {
+  match-records-table th:nth-of-type(2) {
     display: none; }
-  match-record-table match-record-tr td:nth-of-type(2) {
+  match-records-table match-record-tr td:nth-of-type(2) {
     display: none; } }
