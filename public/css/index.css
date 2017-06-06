@@ -1,3 +1,10 @@
+a {
+  color: #c55;
+  cursor: pointer; }
+  a:hover {
+    transition: 1s;
+    text-shadow: 0 0 1px; }
+
 strong {
   color: #f00; }
 
@@ -28,25 +35,31 @@ x-header x-notification p {
 match-record-search-form form {
   text-align: center; }
 
-match-record-table table {
+history-records {
+  display: block;
+  margin-top: 20px; }
+
+match-records-table table {
   width: 100%;
   margin: 0 auto;
   border: 1px solid #ccc; }
-  match-record-table table th, match-record-table table td {
+  match-records-table table match-record-tr.winner {
+    background: rgba(0, 110, 84, 0.1); }
+  match-records-table table th, match-records-table table td {
     padding: 3px;
     border: 1px solid #ccc;
     text-align: center; }
-    match-record-table table th a, match-record-table table td a {
+    match-records-table table th a, match-records-table table td a {
       color: #000;
       text-decoration: none; }
-  match-record-table table th {
+  match-records-table table th {
     background: #ddd; }
-  match-record-table table td.winner {
+  match-records-table table td.winner {
     background: rgba(0, 110, 84, 0.1); }
 
-match-record-table .annotation {
+match-records-table .annotation {
   font-size: 12px; }
-  match-record-table .annotation .winner-box {
+  match-records-table .annotation .winner-box {
     display: inline-block;
     width: 3em;
     color: rgba(0, 110, 84, 0.1);

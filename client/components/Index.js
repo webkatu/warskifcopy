@@ -1,33 +1,48 @@
-import Header from './Header.js';
-import Footer from './Footer.js';
+import actions from '../actions/actions.js';
+import { matchRecordSearch } from '../stores/index.js';
 import MatchRecordSearchForm from './MatchRecordSearchForm.js';
-import MatchRecordSearch from './MatchRecordSearch.js';
+import MatchRecords from './MatchRecords.js';
+import HistoryRecords from './HistoryRecords.js';
+
+/*
+const template = document.createElement('template');
+template.innerHTML = `
+${new MatchRecordSearchForm().outerHTML}
+${new MatchRecords().outerHTML}
+${new HistoryRecords().outerHTML}
+`;
+*/
 
 export default class Index extends HTMLElement {
 	constructor() {
 		super();
+
 		this.className = 'index';
-		this.header = new Header();
-		this.matchRecordSearchForm = new MatchRecordSearchForm();
-		this.matchRecordSearch = new MatchRecordSearch();
-		this.footer = new Footer();
-		//this.searchHistory = new SearchHistory();
-		this.appendChild(this.header);
-		this.appendChild(this.matchRecordSearchForm);
-		this.appendChild(this.matchRecordSearch);
-		this.appendChild(this.footer);
-		//this.appendChild(this.searchHistory);
+		this.appendChild(new MatchRecordSearchForm());
+		this.appendChild(new MatchRecords());
+		this.appendChild(new HistoryRecords());
+
+		this.matchRecords = this.querySelector('match-records');
 	}
 
-	attributeChangedCallback(attr, oldValue, newValue) {
-		switch(attr) {
-			case 'search-id':
-				this.matchRecordSearchForm.setAttribute('id-value', newValue);
-				this.matchRecordSearch.setAttribute('search-id', newValue)
+	connectedCallback() {
+		if(matchRecordSearch.searchId === ''){
+			this.matchRecords.style.display = 'none';
+		}else {
+			actions.fetchMatchRecords(
+				matchRecordSearch.searchId,
+				matchRecordSearch.urls,
+				matchRecordSearch.start
+			);
+
+			this.matchRecords.style.display = '';
 		}
 	}
 
-	static get observedAttributes() { return ['search-id']; }
+	disconnectedCallback() {
+		actions.unmountIndex();
+	}
+
 }
 
 customElements.define('x-index', Index);

@@ -1,5 +1,15 @@
 $baseTextColor: #000;
 
+a {
+	color: #c55;
+	cursor: pointer;
+
+	&:hover {
+		transition: 1s;
+		text-shadow: 0 0 1px;
+	}
+}
+
 strong {
 	color: #f00;
 }
@@ -43,12 +53,22 @@ match-record-search-form {
 	}
 }
 
+history-records {
+	display: block;
+	margin-top: 20px;
+}
+
 $winnerColor: rgba(0,110,84,0.1);
-match-record-table {
+match-records-table {
 	table {
 		width: 100%;
 		margin: 0 auto;
 		border: 1px solid #ccc;
+
+		match-record-tr.winner {
+			background: $winnerColor;
+		}
+
 		th, td {
 			padding: 3px;
 			border: 1px solid #ccc;

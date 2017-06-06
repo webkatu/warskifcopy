@@ -1,39 +1,52 @@
+import useState from 'usestate';
+import { notification } from '../stores/index.js';
+
 const template = document.createElement('template');
 template.innerHTML = `
 <p style="display: none;"></p>
 `
 
+@useState
 export default class Notificaion extends HTMLElement {
 	constructor() {
 		super();
-		const content = this.constructor.template.content.cloneNode(true);
-		this.p = content.querySelector('p');
 
+		this.handleNotificationChange = this.handleNotificationChange.bind(this);
+		this.timerId = null;
+
+		const content = template.content.cloneNode(true);
+		this.p = content.querySelector('p');
+		
 		this.appendChild(content);
 	}
 
-	attributeChangedCallback(attr, oldValue, newValue) {
-		switch(attr) {
-			case 'text':
-				this.firstElementChild.textContent = newValue;
-				break;
+	handleNotificationChange(e) {
+		this.setState(notification);
+	}
 
-			case 'display-time':
-				let time = Number(newValue);
-				if(Number.isNaN(time) || time === 0) return;
+	connectedCallback() {
+		notification.on('CHANGE', this.handleNotificationChange);
+		this.handleNotificationChange();
+	}
 
+	disconnectedCallback() {
+		notification.removeListener('CHANGE', this.handleNotificationChange);
+	}
+
+	stateChangedCallback(name, oldValue, newValue) {
+		switch(name) {
+			case 'displayId':
+				this.p.textContent = notification.text;
 				this.p.style.display = '';
-				setTimeout(() => {
+				window.clearTimeout(this.timerId);
+				this.timerId = window.setTimeout(() => {
 					this.p.style.display = 'none';
-					this.setAttribute('display-time', '');
-				}, time);
-				break;
+				}, notification.displayTime);
+				return;
 		}
 	}
 
-	static get observedAttributes() { return ['text', 'display-time']; }
-
-	static template = template;
+	static get observedState() { return ['displayId']; }
 }
 
 customElements.define('x-notification', Notificaion);

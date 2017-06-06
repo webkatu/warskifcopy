@@ -10,11 +10,10 @@ export default class Footer extends HTMLElement {
 	constructor() {
 		super();
 
-		const content = this.constructor.template.content.cloneNode(true);
+		const content = template.content.cloneNode(true);
 		this.appendChild(content);
 	}
 
-	static template = template;
 }
 
 customElements.define('x-footer', Footer);

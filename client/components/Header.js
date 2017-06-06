@@ -11,14 +11,12 @@ template.innerHTML = `
 export default class Header extends HTMLElement {
 	constructor() {
 		super();
-		const content = this.constructor.template.content.cloneNode(true);
+		const content = template.content.cloneNode(true);
 		content.appendChild(new Notification());
 		content.querySelector('a').href = config.deploy;
 
 		this.appendChild(content);
 	}
-
-	static template = template;
 }
 
 customElements.define('x-header', Header);
