@@ -4194,7 +4194,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var template = document.createElement('template');
-	template.innerHTML = '\n<div id="header"></div>\n<div id="main"><div></div></div>\n<div id="footer"></div>\n';
+	template.innerHTML = '\n<div id="header"></div>\n<div id="main"><div></div></div>\n<div id="footer"></div>';
 
 	var App = function (_HTMLElement) {
 			(0, _inherits3.default)(App, _HTMLElement);
@@ -4205,8 +4205,8 @@
 					var _this = (0, _possibleConstructorReturn3.default)(this, (App.__proto__ || (0, _getPrototypeOf2.default)(App)).call(this));
 
 					var content = template.content.cloneNode(true);
-					content.replaceChild(new _Header2.default(), content.firstElementChild);
-					content.replaceChild(new _Footer2.default(), content.lastElementChild);
+					content.replaceChild(new _Header2.default(), content.firstChild);
+					content.replaceChild(new _Footer2.default(), content.lastChild);
 					var main = content.querySelector('#main');
 
 					_this.id = 'app';
@@ -5921,7 +5921,7 @@
 /***/ function(module, exports) {
 
 	const map = new WeakMap();
-	const privates = (object) => {
+	const privates = function(object) {
 		if(! map.has(object)) {
 			map.set(object, {});
 		}
@@ -5941,10 +5941,10 @@
 		if(Array.isArray(this.constructor.observedState) === false) return;
 		if(typeof this.stateChangedCallback !== 'function') return;
 
-		this.constructor.observedState.forEach((name) => {
+		this.constructor.observedState.forEach(function(name) {
 			if(oldState[name] === newState[name]) return;
 			this.stateChangedCallback(name, oldState[name], newState[name]);
-		});
+		}, this);
 	}
 
 	module.exports = function useState(target) {

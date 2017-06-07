@@ -16,7 +16,7 @@ export default class Notificaion extends HTMLElement {
 
 		const content = template.content.cloneNode(true);
 		this.p = content.querySelector('p');
-		
+
 		this.appendChild(content);
 	}
 

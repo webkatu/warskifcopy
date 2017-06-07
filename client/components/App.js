@@ -10,16 +10,15 @@ const template = document.createElement('template');
 template.innerHTML = `
 <div id="header"></div>
 <div id="main"><div></div></div>
-<div id="footer"></div>
-`;
+<div id="footer"></div>`;
 
 export default class App extends HTMLElement {
 	constructor() {
 		super();
 
 		const content = template.content.cloneNode(true);
-		content.replaceChild(new Header(), content.firstElementChild);
-		content.replaceChild(new Footer(), content.lastElementChild);
+		content.replaceChild(new Header(), content.firstChild);
+		content.replaceChild(new Footer(), content.lastChild);
 		const main = content.querySelector('#main');
 
 		this.id = 'app';

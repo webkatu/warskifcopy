@@ -1,3 +1,4 @@
+require('babel-polyfill');
 require('./Promise.js');
 require('./fetch.js');
 require('./custom-elements.min.js');

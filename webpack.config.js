@@ -49,5 +49,9 @@ module.exports = [
 			path: __dirname + '/public/js',
 			filename: 'polyfills.js',
 		},
+		module: {
+			noParse: /Promise.js/
+		},
+		//devtool: 'inline-source-map',
 	},
 ];

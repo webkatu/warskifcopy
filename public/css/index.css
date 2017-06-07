@@ -14,6 +14,7 @@ html {
 body {
   max-width: 960px;
   margin: 0 auto;
+  padding: 0 5px;
   background: snow; }
 
 .app {
@@ -53,7 +54,8 @@ match-records-table table {
   match-records-table table th, match-records-table table td {
     padding: 3px;
     border: 1px solid #ccc;
-    text-align: center; }
+    text-align: center;
+    vertical-align: middle; }
     match-records-table table th a, match-records-table table td a {
       color: #000;
       text-decoration: none; }
