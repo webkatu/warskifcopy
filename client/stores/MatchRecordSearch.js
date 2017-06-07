@@ -49,8 +49,7 @@ export default class MatchRecordSearch extends Emitter {
 		});
 
 		dispatcher.on('unmountIndex', () => {
-			const searchId = this.searchId;
-			Object.assign(this, JSON.parse(JSON.stringify(initialState)), { searchId });
+			Object.assign(this, JSON.parse(JSON.stringify(initialState)));
 			this.emit('CHANGE');
 		});
 	}

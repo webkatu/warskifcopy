@@ -18,8 +18,8 @@ export default class App extends HTMLElement {
 		super();
 
 		const content = template.content.cloneNode(true);
-		content.replaceChild(new Header(), content.firstChild);
-		content.replaceChild(new Footer(), content.lastChild);
+		content.replaceChild(new Header(), content.firstElementChild);
+		content.replaceChild(new Footer(), content.lastElementChild);
 		const main = content.querySelector('#main');
 
 		this.id = 'app';
@@ -28,6 +28,11 @@ export default class App extends HTMLElement {
 		const index = new Index();
 
 		const router = leads.Router();
+
+		router.use((req, res, next) => {
+			main.removeChild(main.firstChild);
+			next();
+		});
 
 		router.use((req, res, next) => {
 			sendPageView();
@@ -39,11 +44,11 @@ export default class App extends HTMLElement {
 				if(req.query.id === undefined) return next();
 
 				actions.inputSearchId(req.query.id);
-				main.replaceChild(index, main.firstChild);
+				main.appendChild(index);
 			},
 
 			(req, res) => {
-				main.replaceChild(index, main.firstChild);
+				main.appendChild(index);
 			}
 		);
 

@@ -15,10 +15,12 @@ strong {
 }
 
 html {
-	border-top: 6px solid #fbb;
+	border-top: 7px solid rgba(0, 110, 84, 1);
 }
 
 body {
+	max-width: 960px;
+	margin: 0 auto;
 	background: rgb(255, 250, 250);
 }
 
@@ -103,6 +105,7 @@ match-records-table {
 
 x-footer {
 	footer {
+		margin-top: 40px;
 		font-size: 12px;
 	}
 }
@@ -113,15 +116,9 @@ x-index {
 			margin-top: 60px;
 		}
 	}
-	match-record-search {
-		article {
-			margin-top: 20px;
-		}
-	}
-	x-footer {
-		footer {
-			margin-top: 40px;
-		}
+	match-records {
+		display: block;
+		margin-top: 20px;
 	}
 }
 

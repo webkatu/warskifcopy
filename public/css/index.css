@@ -9,9 +9,11 @@ strong {
   color: #f00; }
 
 html {
-  border-top: 6px solid #fbb; }
+  border-top: 7px solid #006e54; }
 
 body {
+  max-width: 960px;
+  margin: 0 auto;
   background: snow; }
 
 .app {
@@ -69,16 +71,15 @@ match-records-table .annotation {
     background: rgba(0, 110, 84, 0.1); }
 
 x-footer footer {
+  margin-top: 40px;
   font-size: 12px; }
 
 x-index match-record-search-form form {
   margin-top: 60px; }
 
-x-index match-record-search article {
+x-index match-records {
+  display: block;
   margin-top: 20px; }
-
-x-index x-footer footer {
-  margin-top: 40px; }
 
 @media screen and (max-width: 720px) {
   .app {
