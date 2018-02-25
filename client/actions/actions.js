@@ -107,6 +107,7 @@ async function fetchKifu(url, record) {
 	const doc = new DOMParser().parseFromString(text, 'text/html');
 	let queryIndex = 11;
 	if(doc.querySelectorAll('script')[queryIndex].textContent.indexOf('receiveMove') === -1) queryIndex = 12;
+	if(doc.querySelectorAll('script')[queryIndex].textContent.indexOf('receiveMove') === -1) queryIndex = 13;
 	const moves = doc.querySelectorAll('script')[queryIndex].textContent.match(/receiveMove\(\"(.+)\"\);/)[1].split('\t');
 	moves.pop();
 	let kifuText = ``
