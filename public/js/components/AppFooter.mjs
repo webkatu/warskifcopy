@@ -11,6 +11,7 @@ const html = `
 		<p>対局日時をクリックすると将棋ウォーズで棋譜が見れます。</p>
 	</section>
 	<address>作者: <a href="https://twitter.com/vinyufi" target="_blank">@vinyufi</a></address>
+	<p><a href="https://github.com/webkatu/warskifcopy" target="_blank">GitHub</a></p>
 </footer>
 
 <style>
