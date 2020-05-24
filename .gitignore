@@ -1,4 +1,7 @@
 node_modules/
 npm-debug.log
-server/.htaccess
+server/secret.js
+server/cookies.json
+server/localStorage.json
+server/warsReCaptcha/
 public/js/analytics.js
