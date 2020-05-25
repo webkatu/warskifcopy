@@ -102,10 +102,12 @@ async function fetchRecords(urls, searchId, page) {
 			let date = element.querySelector('.game_date').textContent.trim();
 			const matched = date.match(/\((.+)\)/);
 			if(matched !== null) date = matched[1];
+			const time = new Date(date).getTime();
+			date = date.replace(/(.*?\/)/, ''); //year消す;
 
 			const url = config.warsOrigin + element.querySelector('.game_replay a').getAttribute('href');
 			const isWinner = element.querySelector('.game_caption').classList.contains('win_games');
-			
+
 			return {
 				black,
 				white,
@@ -113,6 +115,7 @@ async function fetchRecords(urls, searchId, page) {
 				whiteUserPage,
 				winner,
 				date,
+				time,
 				url,
 				className,
 				isWinner: element.classList.contains('winner'),

@@ -23,10 +23,8 @@ export default class MatchRecords extends EventTarget {
 			
 			this.records = this.records.concat(e.detail.records);
 			this.records.sort((a, b) => {
-				const aTime = new Date(a.date).getTime();
-				const bTime = new Date(b.date).getTime();
-				if(aTime > bTime) return -1;
-				if(aTime < bTime) return 1;
+				if(a.time > b.time) return -1;
+				if(a.time < b.time) return 1;
 				return 0;
 			});
 
