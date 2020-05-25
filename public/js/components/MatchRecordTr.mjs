@@ -4,6 +4,7 @@ import { app, matchRecord } from '../stores/index.mjs';
 const html = `
 <td></td>
 <td></td>
+<td></td>
 <td><a is="spa-anchor"></a></td>
 <td><a is="spa-anchor"></a></td>
 <td><button type="button">コピー</button></td>
@@ -42,6 +43,7 @@ export default class MatchRecordTr extends HTMLTableRowElement {
 		this.className = this.record.className;
 		this.black = this.record.black;
 		this.white = this.record.white;
+		this.senkei = this.record.senkei;
 		this.isWinner = this.record.isWinner;
 		this.isFetchingKifu = this.record.isFetchingKifu;
 		this.doesHaveKifu = this.record.doesHaveKifu;
@@ -61,11 +63,24 @@ export default class MatchRecordTr extends HTMLTableRowElement {
 		this.tds[1].textContent = val;
 	}
 
+	set senkei(val) {
+		if(val === this._senkei) return;
+		this._senkei = val;
+
+		val.forEach((senkei) => {
+			const a = document.createElement('a');
+			a.href = senkei.href;
+			a.target = '_blank';
+			a.textContent = senkei.text;
+			this.tds[2].append(a);
+		});
+	}
+
 	set black(val) {
 		if(val === this._black) return;
 		this._black = val;
 
-		const a = this.tds[2].querySelector('a');
+		const a = this.tds[3].querySelector('a');
 		//split(' ')はスペースではなく&thinsp;
 		a.href = `${app.deploy}/?id=${val.split(' ')[0]}`;
 		a.textContent = val;
@@ -75,7 +90,7 @@ export default class MatchRecordTr extends HTMLTableRowElement {
 		if(val === this._white) return;
 		this._white = val;
 
-		const a = this.tds[3].querySelector('a');
+		const a = this.tds[4].querySelector('a');
 		a.href = `${app.deploy}/?id=${val.split(' ')[0]}`;
 		a.textContent = val;
 	}

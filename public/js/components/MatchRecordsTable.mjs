@@ -30,6 +30,10 @@ table {
 	border: 1px solid #ccc;
 }
 
+table tr {
+	font-size: 10px;
+}
+
 table tr.winner {
 	background: var(--winner-color)
 }
@@ -56,7 +60,22 @@ a:hover {
 	text-shadow: var(--a-hover-text-shadow);
 }
 
+table tr td:nth-of-type(3) {
+	font-size: 8px;
+}
+
+table tr td:nth-of-type(3) a {
+	color: var(--a-color);
+}
+
+table tr td button {
+	font-size: 8px;
+}
+
 @media screen and (max-width: 600px) {
+	table tr {
+		font-size: 8px;
+	}
 	table tr th:nth-of-type(2),
 	table tr td:nth-of-type(2) {
 		display: none;

@@ -108,6 +108,15 @@ async function fetchRecords(urls, searchId, page) {
 			const url = config.warsOrigin + element.querySelector('.game_replay a').getAttribute('href');
 			const isWinner = element.querySelector('.game_caption').classList.contains('win_games');
 
+			const senkeiElement = element.querySelectorAll('.game_params a');
+			const senkei = [];
+			Array.from(senkeiElement, (el) => {
+				senkei.push({
+					href: config.warsOrigin + el.getAttribute('href'),
+					text: el.textContent,
+				});
+			});
+
 			return {
 				black,
 				white,
@@ -118,6 +127,7 @@ async function fetchRecords(urls, searchId, page) {
 				time,
 				url,
 				className,
+				senkei,
 				isWinner: element.classList.contains('winner'),
 				isFetchingKifu: false,
 				doesHaveKifu: false,
