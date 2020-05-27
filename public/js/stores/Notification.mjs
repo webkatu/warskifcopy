@@ -52,7 +52,7 @@ export default class Notification extends EventTarget {
 			this.dispatchEvent(new Event('CHANGE'));
 		});
 
-		dispatcher.addEventListener('fetchKifuSuccessful', () => {
+		dispatcher.addEventListener('copyKifu', () => {
 			this.displayId++
 			this.displayTime = 7000;
 			this.text = '棋譜をクリップボードにコピーしました';
@@ -60,10 +60,10 @@ export default class Notification extends EventTarget {
 			this.dispatchEvent(new Event('CHANGE'));
 		});
 
-		dispatcher.addEventListener('copyKifu', () => {
+		dispatcher.addEventListener('copyKifuFailed', () => {
 			this.displayId++
-			this.displayTime = 7000;
-			this.text = '棋譜をクリップボードにコピーしました';
+			this.displayTime = 10000;
+			this.text = 'もう一度ボタンを押してください';
 
 			this.dispatchEvent(new Event('CHANGE'));
 		});

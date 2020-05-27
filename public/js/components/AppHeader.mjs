@@ -2,7 +2,7 @@ import { app } from '../stores/index.mjs';
 
 const html = `
 <header>
-	<h1><a is="spa-anchor" href="${app.deploy}/">${app.title}</a></h1>
+	<h1><a is="spa-anchor" href="${app.deploy}/">${app.title}(メンテ中)</a></h1>
 	<x-notification></x-notification>
 </header>
 

@@ -32,19 +32,22 @@ export default {
 		dispatcher.dispatchEvent(new CustomEvent('fetchKifu', { detail: { record } }));
 		try {
 			var kifu = await fetchKifu(record.url, record);
-			copyText(kifu);
 			//await navigator.clipboard.writeText(kifu);
 		}catch(e) {
 			console.log(e);
 			return dispatcher.dispatchEvent(new CustomEvent('fetchKifuFailed', { detail: { record } }));
 		}
 		dispatcher.dispatchEvent(new CustomEvent('fetchKifuSuccessful', { detail: { record, kifu } }));
+
+		const result = copyText(kifu);
+		if(result === true) dispatcher.dispatchEvent(new Event('copyKifu'));
+		else dispatcher.dispatchEvent(new Event('copyKifuFailed'));
 	},
 
 	async copyKifu(record) {
 		copyText(record.kifu);
 		//await navigator.clipboard.writeText(record.kifu);
-		dispatcher.dispatchEvent(new CustomEvent('copyKifu', { detail: { record } }));
+		dispatcher.dispatchEvent(new Event('copyKifu'));
 	},
 
 	initApp() {
@@ -176,6 +179,7 @@ function copyText(text) {
 	document.body.appendChild(textarea);
 	textarea.value = text;
 	textarea.select();
-	document.execCommand('copy');
+	const result = document.execCommand('copy');
 	document.body.removeChild(textarea);
+	return result;
 }
