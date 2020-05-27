@@ -5,7 +5,14 @@ const express = require('express');
 (async () => {
 
 const browser = await puppeteer.launch({
-	args: ['--no-sandbox', '--disable-setuid-sandbox'],
+	args: [
+		'--no-sandbox',
+		'--disable-setuid-sandbox',
+		'--disable-gpu',
+		'--disable-dev-shm-usage',
+		'--no-first-run',
+		'--no-zygote',
+	],
 }).catch((e) => {
 	console.log(e);
 	process.exit(1);
