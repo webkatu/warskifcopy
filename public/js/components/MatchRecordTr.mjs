@@ -53,7 +53,7 @@ export default class MatchRecordTr extends HTMLTableRowElement {
 		if(val === this._date) return;
 		this._date = val;
 
-		this.tds[0].innerHTML = `<a  href="${this.record.url}" target="_blank">${val}</a>`;
+		this.tds[0].innerHTML = `<a  href="${this.record.url}" target="_blank" rel="noopener">${val}</a>`;
 	}
 
 	set className(val) {
@@ -71,6 +71,7 @@ export default class MatchRecordTr extends HTMLTableRowElement {
 			const a = document.createElement('a');
 			a.href = senkei.href;
 			a.target = '_blank';
+			a.rel = 'noopener';
 			a.textContent = senkei.text;
 			this.tds[2].append(a);
 		});
