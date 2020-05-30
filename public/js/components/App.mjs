@@ -5,7 +5,7 @@ import sendPageView from '../common/sendPageView.mjs';
 
 const html = `
 <app-header></app-header>
-<div id="main"></div>
+<main></main>
 <app-footer></app-footer>
 
 <style>
@@ -30,7 +30,7 @@ export default class App extends HTMLElement {
 		const shadowRoot = this.attachShadow({mode: 'closed'});
 		shadowRoot.innerHTML = html;
 
-		const main = shadowRoot.querySelector('#main');
+		const main = shadowRoot.querySelector('main');
 		const appIndex = document.createElement('app-index');
 
 		page.base(app.deploy);
