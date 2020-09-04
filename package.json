@@ -8,7 +8,7 @@
   "devDependencies": {},
   "dependencies": {
     "express": "^4.17.1",
-    "puppeteer": "^3.0.4"
+    "puppeteer": "^5.2.1"
   },
   "license": "ISC"
 }
